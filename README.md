@@ -1,64 +1,35 @@
-# Generador de mensajes de asistencia (Gemini)
+# Generador de Mensajes (Gemini) y de Imágenes (Vertex AI)
 
-Qué es
-- Notebook que genera mensajes de RR. HH. para ausencias usando Google Gemini.
-- La API key está ofuscada en el notebook para ejecutar sin .env (solo uso académico).
+Este proyecto demuestra la integración de dos potentes servicios de IA de Google:
+- **Google Gemini:** para la generación de texto (mensajes de RR.HH. para ausencias).
+- **Vertex AI:** para la generación de imágenes de bienvenida a partir de prompts.
 
-Requisitos
+## Requisitos Fundamentales
+
 - Python 3.10+
-- VS Code con extensiones Python y Jupyter (o Jupyter Notebook/Lab)
-- Internet
+- **Una cuenta de Google Cloud:** Se puede usar la capa gratuita, pero requiere vincular una tarjeta para la verificación inicial.
+- **Un proyecto de Google Cloud:** con la API de Vertex AI habilitada.
+- **Una clave de API de Google AI Studio:** para el uso de Gemini.
 
-Instalación
-1) Clonar
-```
-git clone https://github.com/MatiasBoek/Proyecto_Clase_IA.git
-cd Proyecto_Clase_IA
-```
-2) Entorno e instalación
-- Windows:
-```
-py -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
-- macOS/Linux:
-```
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
+## 1. Configuración Obligatoria: Google Cloud y `.env`
 
-Ejecución
-1) Abrir el .ipynb en VS Code/Jupyter
-2) Seleccionar el kernel del entorno (.venv)
-3) Run All
-Deberías ver: prueba “OK” de la API y un mensaje generado.
+Para que **ambas partes del proyecto funcionen**, es indispensable configurar el acceso a los servicios de Google. Usaremos un archivo `.env` para gestionar nuestras credenciales de forma segura. En el archivo .env.example se indican las APIs necesarias para el proyecto 
 
-Reemplazar la API key (opcional)
-- El notebook usa ENC_KEY (key ofuscada). Para cambiarla:
-1) Genera cadena codificada (en una celda aparte, no la subas):
-```
-def encode_key(plain: str) -> str:
-    import zlib, base64
-    return base64.b64encode(zlib.compress(plain.encode())).decode()
-print(encode_key("TU_API_KEY_REAL"))
-```
-2) Copia el resultado en la variable ENC_KEY del notebook.
-3) Ejecuta de nuevo.
+### Paso A: Preparar tu Entorno en Google Cloud
 
-Problemas comunes
-- No encuentra google-generativeai:
-```
-pip install -U google-generativeai
-```
-- 401/UNAUTHENTICATED: la key es inválida/revocada → vuelve a ofuscar una nueva key.
-- 404/MODEL_NOT_FOUND: cambia el modelo a "gemini-1.5-flash-002".
+1.  **Crea un Proyecto:** Ve a la [Consola de Google Cloud](https://console.cloud.google.com/) y crea un nuevo proyecto. Anota el **ID del Proyecto** (ej: `mi-proyecto-ia-123456`).
+2.  **Habilita la Facturación:** Asegúrate de que la facturación esté habilitada para tu proyecto. Es un requisito para usar las APIs, aunque no superes la capa gratuita.
+3.  **Habilita la API de Vertex AI:** En tu proyecto, ve a la sección de APIs y servicios y [habilita la "Vertex AI API"](https://console.cloud.google.com/apis/library/aiplatform.googleapis.com).
+4.  **Genera una API Key para Gemini:** Ve a [Google AI Studio](https://aistudio.google.com/app/apikey), crea un nuevo proyecto y genera una API key.
 
-Estructura
-- Notebook principal: nombre_del_notebook.ipynb
-- requirements.txt
-- README.md
+### Paso B: Configurar tu archivo `.env`
 
-Notas de seguridad
-- La ofuscación solo oculta; no protege. Usa una key con límites y revócala tras la evaluación.
+1.  Busca el archivo `.env.example` en este repositorio.
+2.  Crea una copia de ese archivo y renómbrala a `.env`.
+3.  Abre el nuevo archivo `.env` y rellénalo con los datos que obtuviste en el paso anterior. Debería verse así:
+
+### En el archivo .env.example se indican las APIs necesarias para el proyecto 
+
+
+
+
