@@ -17,7 +17,6 @@ ENV.bak
 *.log
 *.env
 .env
-.env.*
 *.pem
 *.key
 *.crt
